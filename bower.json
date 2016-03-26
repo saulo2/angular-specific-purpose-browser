@@ -1,0 +1,33 @@
+{
+  "name": "angular-specific-purpose-browser",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Saulo Medeiros de Araujo"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "hateoas",
+    "hal",
+    "specific",
+    "purpose",
+    "browser"
+  ],
+  "homepage": "https://github.com/saulo2/angular-specific-purpose-browser",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "angular-hal": "^1.0.7",
+    "angular-route": "^1.5.3"
+  }
+}

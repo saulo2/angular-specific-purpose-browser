@@ -1,0 +1,36 @@
+{
+  "name": "angular-specific-purpose-browser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saulo2/angular-specific-purpose-browser.git"
+  },
+  "keywords": [
+    "angular",
+    "hateoas",
+    "hal",
+    "specific purpose browser"
+  ],
+  "author": "Saulo Medeiros de Araujo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saulo2/angular-specific-purpose-browser/issues"
+  },
+  "homepage": "https://github.com/saulo2/angular-specific-purpose-browser#readme",
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "grunt": "^0.4.5",
+    "grunt-connect-proxy": "^0.2.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-script-link-tags": "^1.0.2",
+    "grunt-stubby": "^0.1.4",
+    "load-grunt-tasks": "^3.4.1"
+  }
+}
