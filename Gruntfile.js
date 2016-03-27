@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     "use strict"
 
     var src = ["src/**/*.js"]
@@ -21,7 +21,7 @@ module.exports = function (grunt) {
         connect: {
             default: {
                 options: {
-                    middleware: function (connect, options, defaultMiddleware) {
+                    middleware: function(connect, options, defaultMiddleware) {
                         var proxy = require("grunt-connect-proxy/lib/utils").proxyRequest
                         return [proxy].concat(defaultMiddleware);
                     }
