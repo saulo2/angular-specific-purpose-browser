@@ -1,24 +1,35 @@
-<ul ng-controller="menu">
-    <li>
-        Project
-        <ul>
-            <li>
-                <a href="{{resource.$href('projectCreation') | href}}">New</a>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <ul class="nav navbar-nav" ng-controller="menu">
+            <li class="dropdown">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                    Project
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-show="resource.$has('projectCreation')">
+                        <a href="{{resource.$href('projectCreation') | href}}">New</a>
+                    </li>
+                    <li ng-show="resource.$has('projectSearch')">
+                        <a href="{{resource.$href('projectSearch') | href}}">Search</a>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="{{resource.$href('projectSearch') | href}}">Search</a>
-            </li>
+            
+            <li class="dropdown">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                    Task
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-show="resource.$has('taskCreation')">
+                        <a href="{{resource.$href('taskCreation') | href}}">New</a>
+                    </li>
+                    <li ng-show="resource.$has('taskSearch')">
+                        <a href="{{resource.$href('taskSearch') | href}}">Search</a>
+                    </li>
+                </ul>
+            </li>            
         </ul>
-    </li>
-    <li>
-        Task
-        <ul>
-            <li>
-                <a href="{{resource.$href('taskCreation') | href}}">New</a>
-            </li>
-            <li>
-                <a href="{{resource.$href('taskSearch') | href}}">Search</a>
-            </li>
-        </ul>
-    </li>
-</ul>
+    </div>
+</nav>

@@ -1,0 +1,31 @@
+<h1 class="page-header">New project</h1>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Name</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="resource.project.name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Description</label>
+        <div class="col-md-10">
+            <textarea class="form-control" rows="5" ng-model="resource.project.description"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tasks</label>
+        <div class="col-md-10">
+            <select class="form-control" multiple ng-model="resource.project.tasks" ng-options="task.id as task.name for task in resource.tasks">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="well">
+                <button type="submit" class="btn btn-primary" ng-show="resource.$has('save')" ng-click="save()">Save</button>
+                <button type="submit" class="btn btn-danger pull-right" ng-show="resource.$has('delete')" ng-click="delete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</form>

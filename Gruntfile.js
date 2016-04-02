@@ -1,11 +1,45 @@
 module.exports = function(grunt) {
     "use strict"
 
-    var src = ["src/**/*.js"]
+    var src = ["src/**/*.js", "!src/timesheet.js"]
     var stubs = ["stubs/**/*.yaml"]
-    var stub = "tmp/stub.yaml"
+    var concatenatedStubs = "tmp/stubs.yaml"
+    var rootPort = 8001
 
     grunt.initConfig({
+        "bower-install-simple": {
+            default: {
+            }
+        },
+        
+        concat: {
+            default: {
+                src: stubs,
+                dest: concatenatedStubs
+            }
+        },
+        
+        stubby: {
+            default: {
+                options: {
+                    mute: false,
+                    watch: concatenatedStubs
+                },
+                files: [{
+                    src: concatenatedStubs
+                }]
+            }
+        },
+        
+        copy: {
+            default: {
+                files: [{
+                    src: ["index.html"],
+                    dest: "tmp/index.html"
+                }]
+            }            
+        },
+        
         tags: {
             default: {
                 options: {
@@ -14,34 +48,29 @@ module.exports = function(grunt) {
                     closeTag: "<!-- end template tags -->"
                 },
                 src: src,
-                dest: "index.html"
+                dest: "tmp/index.html"
             }
         },
 
         connect: {
-            default: {
+            tmp: {
                 options: {
                     middleware: function(connect, options, defaultMiddleware) {
                         var proxy = require("grunt-connect-proxy/lib/utils").proxyRequest
                         return [proxy].concat(defaultMiddleware);
-                    }
+                    },
+                    base: ["tmp"]
                 },
-                proxies: [{
-                    context: "/rest",
-                    host: "localhost",
-                    port: "8882"
-                }]
-            }
-        },
-
-        stubby: {
-            default: {
+                proxies: [
+                    {host: "localhost", port: rootPort, context: "/bower_components"},
+                    {host: "localhost", port: rootPort, context: "/src"},
+                    {host: "localhost", port: 8882, context: "/rest"}
+                ]
+            },
+            root: {
                 options: {
-                    watch: stub
-                },
-                files: [{
-                    src: stubs
-                }]
+                    port: 8001
+                }
             }
         },
 
@@ -54,24 +83,19 @@ module.exports = function(grunt) {
                 files: stubs,
                 tasks: ["concat"]
             }
-        },
-
-        concat: {
-            default: {
-                src: stubs,
-                dest: stub
-            }
         }
     })
 
-    //grunt.loadNpmTasks("grunt-script-link-tags")
-    //grunt.loadNpmTasks("grunt-connect-proxy")
-    //grunt.loadNpmTasks("grunt-contrib-connect")
-    //grunt.loadNpmTasks("grunt-stubby")
-    //grunt.loadNpmTasks("grunt-contrib-watch")
-    //grunt.loadNpmTasks("grunt-contrib-concat")
-
     require("load-grunt-tasks")(grunt)
 
-    grunt.registerTask("default", ["tags", "configureProxies:default", "connect", "stubby", "watch"])
+    grunt.registerTask("default", [
+        "bower-install-simple",
+        "concat",
+        "stubby",
+        "copy",
+        "tags",
+        "configureProxies:tmp",
+        "connect",
+        "watch"
+    ])
 }
