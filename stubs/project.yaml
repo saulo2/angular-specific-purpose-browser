@@ -1,0 +1,61 @@
+- request:
+    method: GET
+    url: ^/rest/project/creation$
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/creation
+        save:
+          href: http://localhost:8000/rest/project/save
+      tasks:
+        - id: 1
+          name: Task 1
+        - id: 2
+          name: Task 2
+        - id: 3
+          name: Task 3
+        - id: 4
+          name: Task 4
+        - id: 5
+          name: Task 5
+      project:
+        name: null
+        description: null
+        tasks: null
+
+- request:
+    method: POST
+    url: ^/rest/project/save$
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body:
+      location: http://localhost:8000/rest/project/creationConfirmation
+
+- request:
+    method: GET
+    url: ^/rest/project/creationConfirmation$
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/creationConfirmation
+
+- request:
+    method: GET
+    url: ^/rest/project/search$
+  response:
+    status: 200
+    content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search

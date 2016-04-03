@@ -1,0 +1,22 @@
+- request:
+    method: GET
+    url: ^/rest/task/creation$    
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/task/creation
+
+- request:
+    url: ^/rest/task/search$
+    method: GET
+  response:
+    status: 200
+    content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/task/search

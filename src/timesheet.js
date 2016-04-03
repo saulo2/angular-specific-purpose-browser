@@ -5,23 +5,24 @@
 
     timesheet.config(function($routeProvider) {
         $routeProvider.when("/", {})
-        
+
         function when(path, controller, templateUrl) {
             $routeProvider.when(path, {
                 controller: controller,
                 templateUrl: "src/" + templateUrl,
                 resolve: {
-                    resource: function($location, halClient, constants) {
-                        return halClient.$get(constants.resourcePrefix + $location.url())
+                    resource: function($location, halClient, configuration) {
+                        return halClient.$get(configuration.resourcePrefix + $location.url())
                     }
                 }
             })
         }
-        
-        when("/projects/search", null, "project/projectSearch.html")
-        when("/projects/creation", "projectEditing", "project/projectEditing.html")
-        
-        when("/tasks/search", null, "task/taskSearch.html")
-        when("/tasks/creation", null, "task/taskCreation.html")        
+
+        when("/project/search", null, "project/projectSearch.html")
+        when("/project/creation", "projectEditing", "project/projectEditing.html")
+        when("/project/creationConfirmation", null, "project/projectCrationConfirmation.html")
+
+        when("/task/search", null, "task/taskSearch.html")
+        when("/task/creation", null, "task/taskCreation.html")        
     })
 })()

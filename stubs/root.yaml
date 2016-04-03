@@ -5,24 +5,15 @@
     status: 200
     headers:
       content-type: application/json+hal
-    body: {
-        "_links": {
-          "self": {
-            "href": "http://localhost:8882/rest"
-          },
-          
-          "projectSearch": {
-             "href": "http://localhost:8882/rest/projects/search"
-          },
-          "projectCreation": {
-              "href": "http://localhost:8882/rest/projects/creation"
-          },
-          
-          "taskSearch": {
-              "href": "http://localhost:8882/rest/tasks/search"
-          },
-          "taskCreation": {
-              "href": "http://localhost:8882/rest/tasks/creation"
-          }          
-        }
-      }
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest
+        projectSearch:
+          href: http://localhost:8000/rest/project/search
+        projectCreation:
+          href: http://localhost:8000/rest/project/creation
+        taskSearch:
+          href: http://localhost:8000/rest/task/search
+        taskCreation:
+          href: http://localhost:8000/rest/task/creation

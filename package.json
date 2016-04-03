@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/saulo2/angular-specific-purpose-browser#readme",
   "devDependencies": {
-    "bower": "^1.7.7",
     "grunt": "^0.4.5",
     "grunt-bower-install-simple": "^1.2.1",
     "grunt-connect-proxy": "^0.2.0",

@@ -1,11 +1,6 @@
 module.exports = function(grunt) {
     "use strict"
 
-    var src = ["src/**/*.js", "!src/timesheet.js"]
-    var stubs = ["stubs/**/*.yaml"]
-    var concatenatedStubs = "tmp/stubs.yaml"
-    var rootPort = 8001
-
     grunt.initConfig({
         "bower-install-simple": {
             default: {
@@ -14,8 +9,8 @@ module.exports = function(grunt) {
         
         concat: {
             default: {
-                src: stubs,
-                dest: concatenatedStubs
+                src: ["stubs/**/*.yaml"],
+                dest: "tmp/stubs.yaml"
             }
         },
         
@@ -23,10 +18,10 @@ module.exports = function(grunt) {
             default: {
                 options: {
                     mute: false,
-                    watch: concatenatedStubs
+                    watch: "tmp/stubs.yaml"
                 },
                 files: [{
-                    src: concatenatedStubs
+                    src: "tmp/stubs.yaml"
                 }]
             }
         },
@@ -43,11 +38,11 @@ module.exports = function(grunt) {
         tags: {
             default: {
                 options: {
-                    scriptTemplate: '<script src="{{path}}"></script>',
+                    scriptTemplate: '<script src="{{path.substring(3)}}"></script>',
                     openTag: "<!-- start template tags -->",
                     closeTag: "<!-- end template tags -->"
                 },
-                src: src,
+                src: ["src/**/*.js", "!src/timesheet.js"],
                 dest: "tmp/index.html"
             }
         },
@@ -62,8 +57,8 @@ module.exports = function(grunt) {
                     base: ["tmp"]
                 },
                 proxies: [
-                    {host: "localhost", port: rootPort, context: "/bower_components"},
-                    {host: "localhost", port: rootPort, context: "/src"},
+                    {host: "localhost", port: 8001, context: "/bower_components"},
+                    {host: "localhost", port: 8001, context: "/src"},
                     {host: "localhost", port: 8882, context: "/rest"}
                 ]
             },
@@ -76,12 +71,18 @@ module.exports = function(grunt) {
 
         watch: {
             src: {
-                files: src,
+                files: ["src/**/*.js"],
                 tasks: ["tags"]
             },
             stubs: {
-                files: stubs,
+                files: ["stubs/**/*.yaml"],
                 tasks: ["concat"]
+            },
+            reload: {
+                options: {
+                    livereload: true,
+                },
+                files: ["index.html", "src/**/*.{html,js}", "stubs/**/*.yaml"],
             }
         }
     })

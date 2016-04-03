@@ -1,7 +1,7 @@
 (function() {
     "use strict"
 
-    angular.module("timesheet").factory("constants", function() {
+    angular.module("timesheet").factory("configuration", function() {
         return {
             resourcePrefix: "rest"
         }
