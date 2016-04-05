@@ -33,29 +33,277 @@
   response:
     status: 200
     headers:
-      content-type: application/json
+      content-type: application/json+hal
     body:
-      location: http://localhost:8000/rest/project/creationConfirmation
-
+      location: http://localhost:8000/rest/project/1/creationConfirmation
+      
 - request:
     method: GET
-    url: ^/rest/project/creationConfirmation$
+    url: ^/rest/project/1/creationConfirmation$
   response:
     status: 200
     headers:
-      content-type: application/json
+      content-type: application/json+hal
     body:
       _links:
         self:
-          href: http://localhost:8000/rest/project/creationConfirmation
+          href: http://localhost:8000/rest/project/1/creationConfirmation
+        creation:
+          href: http://localhost:8000/rest/project/creation
+        editing:
+          href: http://localhost:8000/rest/project/1/editing      
+
+- request:
+    method: GET
+    url: ^/rest/project/search$
+    query:
+      name: a
+      description: b
+      tasks: 1
+      page: 0
+      size: 2
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search
+        search:
+          href: http://localhost:8000/rest/project/search{?name,description,tasks*,page,size}
+          templated: true
+        result:
+          href: http://localhost:8000/rest/project/search/result{?name,description,tasks*,page,size}
+          templated: true
+      form:
+        options:
+          name: a
+          description: b
+          tasks: [1]
+        tasks:
+          - id: 1
+            name: Task 1
+          - id: 2
+            name: Task 2
+          - id: 3
+            name: Task 3
+          - id: 4
+            name: Task 4
+          - id: 5
+            name: Task 5
+      result:
+        page: 0
+        size: 2
+        total: 5
+        projects:
+          - id: 1
+            name: Project 1
+          - id: 2
+            name: Project 2
+
+- request:
+    method: GET
+    url: ^/rest/project/search$
+    query:
+      name: a
+      description: b
+      tasks: 1
+      page: 1
+      size: 2
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal    
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search
+        search:
+          href: http://localhost:8000/rest/project/search{?name,description,tasks*,page,size}
+          templated: true
+        result:
+          href: http://localhost:8000/rest/project/search/result{?name,description,tasks*,page,size}
+          templated: true
+      form:
+        options:
+          name: a
+          description: b
+          tasks: [1]
+        tasks:
+          - id: 1
+            name: Task 1
+          - id: 2
+            name: Task 2
+          - id: 3
+            name: Task 3
+          - id: 4
+            name: Task 4
+          - id: 5
+            name: Task 5
+      result:
+        page: 1
+        size: 2
+        total: 5
+        projects:
+          - id: 3
+            name: Project 3
+          - id: 4
+            name: Project 4
+
+- request:
+    method: GET
+    url: ^/rest/project/search$
+    query:
+      name: a
+      description: b
+      tasks: 1
+      page: 2
+      size: 2
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search
+        search:
+          href: http://localhost:8000/rest/project/search{?name,description,tasks*,page,size}
+          templated: true
+        result:
+          href: http://localhost:8000/rest/project/search/result{?name,description,tasks*,page,size}
+          templated: true
+      form:
+        options:
+          name: a
+          description: b
+          tasks: [1]
+        tasks:
+          - id: 1
+            name: Task 1
+          - id: 2
+            name: Task 2
+          - id: 3
+            name: Task 3
+          - id: 4
+            name: Task 4
+          - id: 5
+            name: Task 5
+      result:
+        page: 2
+        size: 2
+        total: 5
+        projects:
+          - id: 5
+            name: Project 5
 
 - request:
     method: GET
     url: ^/rest/project/search$
   response:
     status: 200
-    content-type: application/json+hal
+    headers:
+      content-type: application/json+hal
     body:
       _links:
         self:
           href: http://localhost:8000/rest/project/search
+        search:
+          href: http://localhost:8000/rest/project/search{?name,description,tasks*,page,size}
+          templated: true
+        result:
+          href: http://localhost:8000/rest/project/search/result{?name,description,tasks*,page,size}
+          templated: true
+      form:
+        options:
+          name:
+          description:
+          tasks:
+        tasks:
+          - id: 1
+            name: Task 1
+          - id: 2
+            name: Task 2
+          - id: 3
+            name: Task 3
+          - id: 4
+            name: Task 4
+          - id: 5
+            name: Task 5
+
+- request:
+    method: GET
+    url: ^/rest/project/search/result$
+    query:
+      name: a
+      description: b
+      tasks: 1
+      page: 0
+      size: 2
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search/result
+      page: 0
+      size: 2
+      total: 5
+      projects:
+        - id: 1
+          name: Project 1
+        - id: 2
+          name: Project 2
+
+- request:
+    method: GET
+    url: ^/rest/project/search/result$
+    query:
+      name: a
+      description: b
+      tasks: 1
+      page: 1
+      size: 2
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search/result
+      page: 1
+      size: 2
+      total: 5
+      projects:
+        - id: 3
+          name: Project 3
+        - id: 4
+          name: Project 4
+
+- request:
+    method: GET
+    url: ^/rest/project/search/result$
+    query:
+      name: a
+      description: b
+      tasks: 1
+      page: 2
+      size: 2
+  response:
+    status: 200
+    headers:
+      content-type: application/json+hal
+    body:
+      _links:
+        self:
+          href: http://localhost:8000/rest/project/search/result
+      page: 2
+      size: 2
+      total: 5
+      projects:
+        - id: 5
+          name: Project 5

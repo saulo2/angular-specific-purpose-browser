@@ -1,15 +1,21 @@
 (function () {
     "use strict"
 
-    var timesheet = angular.module("timesheet", ["angular-hal", "ngRoute"])
+    var timesheet = angular.module("timesheet", ["angular-hal", "ngRoute", "ui.bootstrap"])
 
     timesheet.config(function($routeProvider) {
         $routeProvider.when("/", {})
 
-        function when(path, controller, templateUrl) {
+        function when(path, templateUrl, controller, reloadOnSearch) {
+            if (!controller) {
+                controller = function($route, $scope) {
+                    $scope.resource = $route.current.locals.resource
+                }
+            }
             $routeProvider.when(path, {
-                controller: controller,
                 templateUrl: "src/" + templateUrl,
+                controller: controller,
+                reloadOnSearch: reloadOnSearch,
                 resolve: {
                     resource: function($location, halClient, configuration) {
                         return halClient.$get(configuration.resourcePrefix + $location.url())
@@ -18,11 +24,12 @@
             })
         }
 
-        when("/project/search", null, "project/projectSearch.html")
-        when("/project/creation", "projectEditing", "project/projectEditing.html")
-        when("/project/creationConfirmation", null, "project/projectCrationConfirmation.html")
+        when("/project/creation", "project/projectEditing.html", "projectEditing")
+        when("/project/:id/creationConfirmation", "project/projectCreationConfirmation.html")
 
-        when("/task/search", null, "task/taskSearch.html")
-        when("/task/creation", null, "task/taskCreation.html")        
+        when("/project/search", "project/projectSearch.html", "projectSearch", false)
+
+        when("/task/creation", "task/taskCreation.html")
+        when("/task/search", "task/taskSearch.html")
     })
 })()

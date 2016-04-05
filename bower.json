@@ -29,6 +29,8 @@
     "bootstrap": "^3.3.6",
     "angular-hal": "^1.0.7",
     "angular-route": "^1.5.3",
-    "urijs": "uri.js#^1.17.1"
+    "urijs": "uri.js#^1.17.1",
+    "lodash": "^4.8.0",
+    "angular-bootstrap": "^1.2.5"
   }
 }

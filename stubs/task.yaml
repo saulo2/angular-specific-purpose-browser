@@ -15,7 +15,8 @@
     method: GET
   response:
     status: 200
-    content-type: application/json+hal
+    headers:    
+      content-type: application/json+hal
     body:
       _links:
         self:

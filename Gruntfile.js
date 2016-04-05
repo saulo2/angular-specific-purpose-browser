@@ -57,6 +57,7 @@ module.exports = function(grunt) {
                     base: ["tmp"]
                 },
                 proxies: [
+                    {host: "localhost", port: 8001, context: "/css"},
                     {host: "localhost", port: 8001, context: "/bower_components"},
                     {host: "localhost", port: 8001, context: "/src"},
                     {host: "localhost", port: 8882, context: "/rest"}
@@ -71,8 +72,8 @@ module.exports = function(grunt) {
 
         watch: {
             src: {
-                files: ["src/**/*.js"],
-                tasks: ["tags"]
+                files: ["index.html", "src/**/*.js"],
+                tasks: ["copy", "tags"]
             },
             stubs: {
                 files: ["stubs/**/*.yaml"],

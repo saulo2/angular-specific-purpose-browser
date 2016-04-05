@@ -1,1 +1,55 @@
 <h1 class="page-header">Project search</h1>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Name</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="resource.form.options.name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Description</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="resource.form.options.description">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tasks</label>
+        <div class="col-md-10">
+            <select class="form-control" multiple ng-model="resource.form.options.tasks" ng-options="task.id as task.name for task in resource.form.tasks">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="well">
+                <button type="button" class="btn btn-primary" ng-click="search(1)">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row" ng-show="resource.result">
+    <div class="col-md-offset-2 col-md-10">
+        <table class="table table-bordered table-condensed table-hover table-responsive table-striped">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Name</th>
+            </tr>
+            <tr ng-repeat="project in resource.result.projects">
+                <td class="text-center">{{project.id}}</td>
+                <td class="text-center">{{project.name}}</td>
+            </tr>
+        </table>
+
+        <div class="text-center">
+            <uib-pagination ng-model="page"
+                            ng-change="search(page)"
+                            items-per-page="resource.result.size"
+                            total-items="resource.result.total"
+                            direction-links="false"
+                            max-size="10"
+                            force-ellipses="true"><uib-pagination>
+        </div>
+    </div>
+</div>
