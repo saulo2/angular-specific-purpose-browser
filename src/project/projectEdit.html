@@ -24,7 +24,9 @@
         <div class="col-md-offset-2 col-md-10">
             <div class="well">
                 <button type="button" class="btn btn-primary" ng-show="resource.$has('save')" ng-click="save()">Save</button>
-                <button type="button" class="btn btn-danger pull-right" ng-show="resource.$has('delete')" ng-click="delete()">Delete</button>
+                <a href="{{resource.$href('deletionConfirmation') | href}}" class="btn btn-danger pull-right" ng-show="resource.$has('deletionConfirmation')">
+                    Delete
+                </a>
             </div>
         </div>
     </div>

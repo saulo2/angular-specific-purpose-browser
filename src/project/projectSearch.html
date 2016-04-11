@@ -33,23 +33,28 @@
     <div class="col-md-offset-2 col-md-10">
         <table class="table table-bordered table-condensed table-hover table-responsive table-striped">
             <tr>
-                <th class="text-center">Id</th>
                 <th class="text-center">Name</th>
+                <th class="text-center">Description</th>
             </tr>
             <tr ng-repeat="project in resource.result.projects">
-                <td class="text-center">{{project.id}}</td>
-                <td class="text-center">{{project.name}}</td>
+                <td class="text-center">
+                    <a href="{{project.$href('edit') | href}}" ng-show="project.$has('edit')">{{project.name}}</a>
+                    <span ng-hide="project.$has('edit')">{{project.name}}</span>
+                </td>
+                <td class="text-center">
+                    {{project.description}}
+                </td>
             </tr>
         </table>
 
         <div class="text-center">
             <uib-pagination ng-model="page"
                             ng-change="search(page)"
-                            items-per-page="resource.result.size"
-                            total-items="resource.result.total"
                             direction-links="false"
+                            force-ellipses="true"
+                            items-per-page="resource.result.size"
                             max-size="10"
-                            force-ellipses="true"><uib-pagination>
+                            total-items="resource.result.total"></uib-pagination>
         </div>
     </div>
 </div>

@@ -8,6 +8,12 @@
             })
         }
 
+        $scope.delete = function() {
+            $scope.resource.$post("delete").then(function(redirect) {
+                $location.url(url(redirect.location))
+            })
+        }
+
         function initialize(resource) {
             $scope.resource = resource
         }
